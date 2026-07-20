@@ -1,0 +1,21 @@
+package maboutique.shop.boutiqueservice.gestionBoutique.entities;
+
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
+@DiscriminatorValue("ADMIN")
+public class Admin extends Personne {
+
+    private String departement;
+}
