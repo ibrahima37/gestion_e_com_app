@@ -1,8 +1,10 @@
 package maboutique.shop.boutiqueservice.gestionBoutique.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import maboutique.shop.commonentities.gestionCommon.entity.BaseEntity;
 
 import java.util.UUID;
 
@@ -11,7 +13,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@SuperBuilder
+//@SuperBuilder(toBuilder = true)
+@Builder
 @Entity
 @Table(name = "categories")
 public class Categorie extends BaseEntity {
@@ -20,7 +23,7 @@ public class Categorie extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    //@NotBlank
+    @NotBlank
     @Column(nullable = false, unique = true)
     private String nomCategorie;
 

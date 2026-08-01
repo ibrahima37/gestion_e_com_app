@@ -1,7 +1,7 @@
 package maboutique.shop.boutiqueservice.gestionBoutique.services.impl;
 
 import jakarta.persistence.EntityNotFoundException;
-import maboutique.shop.boutiqueservice.gestionBoutique.exceptions.DuplicateResourceException;
+import maboutique.shop.commonentities.gestionCommon.exceptions.DuplicateResourceException;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import maboutique.shop.boutiqueservice.gestionBoutique.dtos.categorie.CategorieDto;

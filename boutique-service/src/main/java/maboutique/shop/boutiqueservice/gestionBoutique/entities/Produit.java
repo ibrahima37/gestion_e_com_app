@@ -3,6 +3,7 @@ package maboutique.shop.boutiqueservice.gestionBoutique.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import maboutique.shop.commonentities.gestionCommon.entity.BaseEntity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @SuperBuilder
-@ToString(exclude = {"avis", "categories"})
+@ToString(exclude = "categories")
 @Entity
 @Table(name = "produits")
 public class Produit extends BaseEntity {
@@ -32,7 +33,10 @@ public class Produit extends BaseEntity {
     private String code;
 
     @Column(precision = 10, scale = 2)
-    private BigDecimal prix;
+    private BigDecimal prixAchat;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal prixVente;
 
     @Builder.Default
     private Integer stock = 0;
@@ -55,13 +59,6 @@ public class Produit extends BaseEntity {
     @Column(nullable = false)
     @Builder.Default
     private int nombreAvis = 0;
-
-    @OneToMany(
-            mappedBy = "produit",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Avis> avis = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categories_id")

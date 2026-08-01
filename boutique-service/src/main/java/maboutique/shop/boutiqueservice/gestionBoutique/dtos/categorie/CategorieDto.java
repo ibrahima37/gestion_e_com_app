@@ -2,7 +2,7 @@ package maboutique.shop.boutiqueservice.gestionBoutique.dtos.categorie;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import maboutique.shop.boutiqueservice.gestionBoutique.dtos.compte.BaseEntityDto;
+import maboutique.shop.commonentities.gestionCommon.dto.BaseEntityDto;
 
 import java.util.UUID;
 

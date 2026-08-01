@@ -72,33 +72,6 @@ public class ProduitController {
         return ResponseEntity.ok().build();
     }
 
-//    @PatchMapping("/{id}/stock")
-//    @PreAuthorize("hasAuthority('MODIFIER_STOCK')")
-//    public ResponseEntity<Void> mettreAJourStock(@PathVariable UUID id, @RequestParam int quantite) {
-//
-//        produitService.mettreAJourStock(id, quantite);
-//
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @PatchMapping("/{id}/stock/augmenter")
-//    @PreAuthorize("hasAuthority('AUGMENTER_STOCK')")
-//    public ResponseEntity<Void> augmenterStock(@PathVariable UUID id, @RequestParam int quantite) {
-//
-//        produitService.augmenterStock(id, quantite);
-//
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @PatchMapping("/{id}/stock/diminuer")
-//    @PreAuthorize("hasAuthority('DIMINUER_STOCK')")
-//    public ResponseEntity<Void> diminuerStock(@PathVariable UUID id, @RequestParam int quantite) {
-//
-//        produitService.diminuerStock(id, quantite);
-//
-//        return ResponseEntity.ok().build();
-//    }
-
     @GetMapping("/{id}/disponible")
     @PreAuthorize("hasAuthority('PRODUIT_DISPONIBLE')")
     public ResponseEntity<Boolean> estDisponible(@PathVariable UUID id) {

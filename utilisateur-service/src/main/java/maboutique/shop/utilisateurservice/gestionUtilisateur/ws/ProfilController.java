@@ -2,9 +2,8 @@ package maboutique.shop.utilisateurservice.gestionUtilisateur.ws;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.compte.ProfilCreationDto;
-import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.compte.ProfilDto;
-import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.compte.UserDetailDto;
+import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.creation.ProfilCreationDto;
+import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.response.ProfilDto;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.services.ints.ProfilService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,11 +57,11 @@ public class ProfilController {
         return profilService.listerProfils();
     }
 
-    @PostMapping("/admin/attribuer-profil/{personneId}/{profilId}")
-    @PreAuthorize("hasAuthority('ATTRIBUER_PROFIL')")
-    public ResponseEntity<UserDetailDto> attribuerProfil(@PathVariable UUID personneId, @PathVariable UUID profilId) {
-        return ResponseEntity.ok(profilService.attribuerProfil(personneId, profilId));
-    }
+//    @PostMapping("/admin/attribuer-profil/{personneId}/{profilId}")
+//    @PreAuthorize("hasAuthority('ATTRIBUER_PROFIL')")
+//    public ResponseEntity<UserDetailDto> attribuerProfil(@PathVariable UUID personneId, @PathVariable UUID profilId) {
+//        return ResponseEntity.ok(profilService.attribuerProfil(personneId, profilId));
+//    }
 
     @DeleteMapping("/{profilId}/personnes/{personneId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

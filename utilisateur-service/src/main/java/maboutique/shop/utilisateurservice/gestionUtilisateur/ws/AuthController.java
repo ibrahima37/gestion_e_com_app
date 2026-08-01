@@ -2,6 +2,11 @@ package maboutique.shop.utilisateurservice.gestionUtilisateur.ws;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.creation.ChangerMotDePasseDto;
+import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.creation.ConnexionDto;
+import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.creation.InscriptionDto;
+import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.creation.ReinitialisationMotDePasseDto;
+import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.response.AuthResponseDto;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.services.ints.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,6 @@
 package maboutique.shop.boutiqueservice.gestionBoutique.mappers.impl;
 
 import lombok.RequiredArgsConstructor;
-import maboutique.shop.boutiqueservice.gestionBoutique.mappers.ints.AvisMapper;
 import maboutique.shop.boutiqueservice.gestionBoutique.dtos.produit.ProduitDto;
 import maboutique.shop.boutiqueservice.gestionBoutique.dtos.produit.ProduitRequestDto;
 import maboutique.shop.boutiqueservice.gestionBoutique.dtos.produit.ProduitResumeDto;
@@ -16,8 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProduitMapperImpl implements ProduitMapper {
 
-    private final AvisMapper avisMapper;
-
     @Override
     public ProduitDto toDto(Produit entity) {
 
@@ -31,22 +28,18 @@ public class ProduitMapperImpl implements ProduitMapper {
                 .marque(entity.getMarque())
                 .modele(entity.getModele())
                 .code(entity.getCode())
-                .prix(entity.getPrix())
+                .prixAchat(entity.getPrixAchat())
+                .prixVente(entity.getPrixVente())
                 .stock(entity.getStock())
                 .description(entity.getDescription())
                 .specification(entity.getSpecification())
                 .images(entity.getImages())
-                .notation(entity.getNotation() != null ? entity.getNotation().floatValue() : 0F)
+                .notation(entity.getNotation())
                 .nombreAvis(entity.getNombreAvis())
                 .categorieId(
                         entity.getCategories() != null
                                 ? entity.getCategories().getId()
                                 : null
-                )
-                .avis(
-                        entity.getAvis() != null
-                                ? avisMapper.toDtoList(entity.getAvis())
-                                : new ArrayList<>()
                 )
                 .build();
     }
@@ -62,9 +55,9 @@ public class ProduitMapperImpl implements ProduitMapper {
                 .id(entity.getId())
                 .nomProduit(entity.getNomProduit())
                 .marque(entity.getMarque())
-                .prix(entity.getPrix())
+                .prixVente(entity.getPrixVente())
                 .images(entity.getImages())
-                .notation(entity.getNotation() != null ? entity.getNotation().floatValue() : 0F)
+                .notation(entity.getNotation())
                 .nombreAvis(entity.getNombreAvis())
                 .categorieId(
                         entity.getCategories() != null
@@ -92,7 +85,7 @@ public class ProduitMapperImpl implements ProduitMapper {
         produit.setMarque(dto.getMarque());
         produit.setModele(dto.getModele());
         produit.setCode(dto.getCode());
-        produit.setPrix(dto.getPrix());
+        produit.setPrixVente(dto.getPrixVente());
         produit.setStock(dto.getStock());
         produit.setDescription(dto.getDescription());
         produit.setSpecification(dto.getSpecification());

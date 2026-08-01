@@ -23,7 +23,6 @@ public class ProduitRequestDto {
     private String nomProduit;
 
     private String marque;
-
     private String modele;
 
     @ValidProductCode
@@ -31,14 +30,11 @@ public class ProduitRequestDto {
 
     @NotNull(message = "Le prix est obligatoire")
     @Positive(message = "Le prix doit être positif")
-    private BigDecimal prix;
+    private BigDecimal prixVente;
 
     private int stock;
-
     private String description;
-
     private String specification;
-
     private List<String> images;
 
     @NotNull(message = "La catégorie est obligatoire")

@@ -79,11 +79,9 @@ public class CategorieMapperImpl implements CategorieMapper {
             categorie.setNomCategorie(dto.getNomCategorie());
         }
 
-
         if (dto.getImage() != null) {
             categorie.setImage(dto.getImage());
         }
-
 
         if (dto.getDescription() != null) {
             categorie.setDescription(dto.getDescription());

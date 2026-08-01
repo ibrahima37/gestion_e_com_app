@@ -16,8 +16,6 @@ public class CategorieRequestDto {
 
     @NotBlank(message = "Le nom de la catégorie est obligatoire")
     private String nomCategorie;
-
     private String image;
-
     private String description;
 }

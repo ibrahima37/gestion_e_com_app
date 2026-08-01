@@ -23,6 +23,7 @@
     <modules>
         <module>boutique-service</module>
         <module>commande-service</module>
+        <module>common-security</module>
         <module>config-service</module>
         <module>discovery-service</module>
         <module>gateway-service</module>
