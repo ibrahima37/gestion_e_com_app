@@ -36,7 +36,7 @@ public class FactureServiceImpl implements FactureService {
     @Override
     public FactureDto genererFacture(UUID commandeId) {
 
-        CommandeDto commande = commandeClient.obtenirCommande(commandeId);
+        CommandeDto commande = commandeClient.getCommandeById(commandeId);
 
         if (commande.getStatutPaiement() != StatutPaiement.EFFECTUE) {
             throw new IllegalStateException("Impossible de générer une facture : commande non payée.");
@@ -144,8 +144,8 @@ public class FactureServiceImpl implements FactureService {
     }
 
     @Override
-    public List<FactureDto> trouverParClient(UUID clientId) {
-        return factureRepository.findByClientId(clientId)
+    public List<FactureDto> trouverParUtilisateur(UUID utilisateurId) {
+        return factureRepository.findByUtilisateurId(utilisateurId)
                 .stream()
                 .map(factureMapper::toDto)
                 .toList();

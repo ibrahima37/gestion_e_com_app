@@ -1,6 +1,7 @@
 package maboutique.shop.commandeservice.gestionCommande.services.impl;
 
 import lombok.RequiredArgsConstructor;
+import maboutique.shop.commandeservice.gestionCommande.dtos.ProduitDTO;
 import maboutique.shop.commandeservice.gestionCommande.dtos.commande.CommandeDto;
 import maboutique.shop.commandeservice.gestionCommande.dtos.commande.CommandeRequestDto;
 import maboutique.shop.commandeservice.gestionCommande.entities.Commande;
@@ -8,6 +9,7 @@ import maboutique.shop.commandeservice.gestionCommande.entities.ProduitCommande;
 import maboutique.shop.commandeservice.gestionCommande.enums.StatutCommande;
 import maboutique.shop.commandeservice.gestionCommande.mappers.ints.CommandeMapper;
 import maboutique.shop.commandeservice.gestionCommande.mappers.ints.ProduitCommandeMapper;
+import maboutique.shop.commandeservice.gestionCommande.models.ProduitClient;
 import maboutique.shop.commandeservice.gestionCommande.repositories.CommandeRepository;
 import maboutique.shop.commandeservice.gestionCommande.services.ints.CommandeService;
 import maboutique.shop.commonentities.gestionCommon.exceptions.CommandeNonAnnulableException;
@@ -32,6 +34,7 @@ public class CommandeServiceImpl implements CommandeService {
     private final CommandeRepository commandeRepository;
     private final CommandeMapper commandeMapper;
     private final ProduitCommandeMapper produitCommandeMapper;
+    private final ProduitClient produitClient;
 
     @Override
     @Transactional
@@ -166,6 +169,25 @@ public class CommandeServiceImpl implements CommandeService {
     @Override
     public void supprimerCommande(UUID id) {
         commandeRepository.deleteById(id);
+    }
+
+    @Override
+    public BigDecimal calculerChiffreAffairesParCategorie(UUID categorieId, int mois, int annee) {
+        // Récupérer toutes les commandes du mois/année
+        List<Commande> commandes = commandeRepository.findAll();
+
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (Commande commande : commandes) {
+            for (ProduitCommande pc : commande.getProduits()) {
+                ProduitDTO produit = produitClient.getProduitById(pc.getProduitId());
+                if (produit.getCategorieId().equals(categorieId)) {
+                    total = total.add(pc.getSousTotal());
+                }
+            }
+        }
+
+        return total;
     }
 }
 

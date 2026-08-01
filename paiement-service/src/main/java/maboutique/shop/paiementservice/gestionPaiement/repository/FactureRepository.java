@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface FactureRepository extends JpaRepository<Facture, UUID> {
 
-    List<Facture> findByClientId(UUID clientId);
+    List<Facture> findByUtilisateurId(UUID utilisateurId);
 
     List<Facture> findByCommandeId(UUID commandeId);
 

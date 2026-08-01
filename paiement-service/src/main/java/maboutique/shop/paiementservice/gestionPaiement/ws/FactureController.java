@@ -66,10 +66,10 @@ public class FactureController {
     }
 
     // ✅ Recherche par client
-    @GetMapping("/client/{clientId}")
+    @GetMapping("/client/{utilisateurId}")
     @PreAuthorize("hasAuthority('TROUVER_FACTURE_CLIENT')")
-    public ResponseEntity<List<FactureDto>> trouverParClient(@PathVariable UUID clientId) {
-        return ResponseEntity.ok(factureService.trouverParClient(clientId));
+    public ResponseEntity<List<FactureDto>> trouverParClient(@PathVariable UUID utilisateurId) {
+        return ResponseEntity.ok(factureService.trouverParUtilisateur(utilisateurId));
     }
 
     // ✅ Recherche par commande

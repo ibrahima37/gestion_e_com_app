@@ -17,5 +17,5 @@ public interface PaiementService {
 
     List<PaiementDto> listerParStatut(StatutPaiement statut);
 
-    List<PaiementDto> listerParClient(UUID clientId);
+    List<PaiementDto> findPaiementsByUtilisateur(UUID utilisateurId);
 }

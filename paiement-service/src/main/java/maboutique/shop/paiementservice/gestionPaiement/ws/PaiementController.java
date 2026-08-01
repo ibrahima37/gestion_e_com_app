@@ -44,8 +44,8 @@ public class PaiementController {
         return ResponseEntity.ok(paiementService.listerParStatut(statut));
     }
 
-    @GetMapping("/client/{clientId}")
-    public ResponseEntity<List<PaiementDto>> listerParClient(@PathVariable UUID clientId) {
-        return ResponseEntity.ok(paiementService.listerParClient(clientId));
+    @GetMapping("/utilisateur/{utilisateurId}")
+    public ResponseEntity<List<PaiementDto>> listerParUtilisateur(@PathVariable UUID utilisateurId) {
+        return ResponseEntity.ok(paiementService.findPaiementsByUtilisateur(utilisateurId));
     }
 }

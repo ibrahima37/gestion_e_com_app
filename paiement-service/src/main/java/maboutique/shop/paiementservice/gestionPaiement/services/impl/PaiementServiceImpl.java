@@ -35,7 +35,7 @@ public class PaiementServiceImpl implements PaiementService {
     public PaiementDto effectuerPaiement(PaiementRequestDto dto) {
 
         // Vérifier que la commande existe et récupérer ses détails
-        CommandeDto commande = commandeClient.obtenirCommande(dto.getCommandeId());
+        CommandeDto commande = commandeClient.getCommandeById(dto.getCommandeId());
         if (commande == null) {
             throw new ResourceNotFoundException("Commande inexistante");
         }
@@ -86,9 +86,12 @@ public class PaiementServiceImpl implements PaiementService {
     }
 
     @Override
-    public List<PaiementDto> listerParClient(UUID clientId) {
-        return paiementRepository.findByClientId(clientId)
-                .stream()
+    public List<PaiementDto> findPaiementsByUtilisateur(UUID utilisateurId) {
+        return paiementRepository.findAll().stream()
+                .filter(p -> {
+                    CommandeDto commande = commandeClient.getCommandeById(p.getCommandeId());
+                    return commande.getUtilisateurId().equals(utilisateurId);
+                })
                 .map(paiementMapper::toDto)
                 .toList();
     }

@@ -14,5 +14,4 @@ public interface PaiementRepository extends JpaRepository<Paiement, UUID> {
 
     List<Paiement> findByStatut(StatutPaiement statut);
 
-    List<Paiement> findByClientId(UUID clientId);
 }

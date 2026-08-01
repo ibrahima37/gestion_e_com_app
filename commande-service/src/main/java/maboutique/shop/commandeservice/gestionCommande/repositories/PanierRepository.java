@@ -9,5 +9,5 @@ import java.util.UUID;
 public interface PanierRepository extends JpaRepository<Panier, UUID> {
 
     // Recherche tous les paniers d’un utilisateur donné
-    List<Panier> findByUtilisateurId(UUID userId);
+    List<Panier> findByUtilisateurId(UUID utilisateurId);
 }

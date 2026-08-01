@@ -3,7 +3,9 @@ package maboutique.shop.utilisateurservice.gestionUtilisateur.securites;
 import lombok.RequiredArgsConstructor;
 import maboutique.shop.commonsecurity.gestionSecurity.interfaces.IPersonnes;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.entities.Personne;
+import maboutique.shop.utilisateurservice.gestionUtilisateur.entities.Utilisateur;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.repository.PersonneRepository;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,6 +23,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         Personne personne = personneRepository.findByEmail(email)
                         .orElseThrow(() -> new UsernameNotFoundException("Utilisateur introuvable"));
 
-        return new CustomUserDetails(personne);
+        return User.builder()
+                .username(personne.getEmail())
+                .password(personne.getMotDePasse()) // mot de passe encodé
+                .authorities(personne.getProfils().stream()
+                        .map(p -> "ROLE_" + p.getPersonnes())
+                        .toArray(String[]::new))
+                .build();
     }
 }

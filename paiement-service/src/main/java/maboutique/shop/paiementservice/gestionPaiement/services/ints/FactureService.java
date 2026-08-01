@@ -37,7 +37,7 @@ public interface FactureService {
 
     FactureDto trouverParId(UUID factureId);
 
-    List<FactureDto> trouverParClient(UUID clientId);
+    List<FactureDto> trouverParUtilisateur(UUID utilisateurId);
 
     List<FactureDto> trouverParCommande(UUID commandeId);
 

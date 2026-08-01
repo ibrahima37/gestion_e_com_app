@@ -13,8 +13,11 @@ import java.util.UUID;
 @FeignClient(name = "commande-service", url = "http://localhost:8081/api/commandes")
 public interface CommandeClient {
 
-    @GetMapping("/{id}")
-    CommandeDto obtenirCommande(@PathVariable("id") UUID id);
+//    @GetMapping("/{id}")
+//    CommandeDto obtenirCommande(@PathVariable("id") UUID id);
+
+    @GetMapping("/api/commande/{id}")
+    CommandeDto getCommandeById(@PathVariable UUID id);
 
     @GetMapping("/{id}/exists")
     boolean existeCommande(@PathVariable("id") UUID id);

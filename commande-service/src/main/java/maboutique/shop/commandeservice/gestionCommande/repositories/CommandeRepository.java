@@ -14,17 +14,13 @@ import java.util.UUID;
 
 public interface CommandeRepository extends JpaRepository<Commande, UUID> {
 
-    List<Commande> findByUserId(UUID userId);
-
     @Query("""
        SELECT COALESCE(SUM(pc.quantite), 0)
        FROM ProduitCommande pc
-       WHERE pc.produit.categories.id = :categorieId
-        AND MONTH(pc.commande.dateCreation) = :mois
-        AND YEAR(pc.commande.dateCreation) = :annee
+       WHERE FUNCTION('MONTH', pc.commande.dateCreation) = :mois
+         AND FUNCTION('YEAR', pc.commande.dateCreation) = :annee
     """)
-    Integer compterProduitsVendus(
-            @Param("categorieId") UUID categorieId,
+    Integer compterProduitsVendusParMois(
             @Param("mois") int mois,
             @Param("annee") int annee
     );
@@ -33,12 +29,10 @@ public interface CommandeRepository extends JpaRepository<Commande, UUID> {
     @Query("""
       SELECT COALESCE(SUM(pc.sousTotal), 0)
       FROM ProduitCommande pc
-      WHERE pc.produit.categories.id = :categorieId
-        AND MONTH(pc.commande.dateCreation) = :mois
-        AND YEAR(pc.commande.dateCreation) = :annee
+      WHERE FUNCTION('MONTH', pc.commande.dateCreation) = :mois
+        AND FUNCTION('YEAR', pc.commande.dateCreation) = :annee
     """)
-    BigDecimal calculerChiffreAffaires(
-            @Param("categorieId") UUID categorieId,
+    BigDecimal calculerChiffreAffairesMensuel(
             @Param("mois") int mois,
             @Param("annee") int annee
     );
@@ -46,14 +40,12 @@ public interface CommandeRepository extends JpaRepository<Commande, UUID> {
     @Query("""
         SELECT COALESCE(
             SUM(
-                (pc.prixUnitaire - pc.prixAchatUnitaire)
-                * pc.quantite
-            ),
-            0
+                (pc.prixUnitaire - pc.prixAchatUnitaire) * pc.quantite
+            ), 0
         )
         FROM ProduitCommande pc
-        WHERE MONTH(pc.commande.dateCreation) = :mois
-            AND YEAR(pc.commande.dateCreation) = :annee
+        WHERE FUNCTION('MONTH', pc.commande.dateCreation) = :mois
+          AND FUNCTION('YEAR', pc.commande.dateCreation) = :annee
     """)
     BigDecimal calculerBeneficeMensuel(
             @Param("mois") int mois,

@@ -4,6 +4,7 @@ import maboutique.shop.commandeservice.gestionCommande.dtos.commande.CommandeDto
 import maboutique.shop.commandeservice.gestionCommande.dtos.commande.CommandeRequestDto;
 import maboutique.shop.commandeservice.gestionCommande.enums.StatutCommande;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,5 +39,7 @@ public interface CommandeService {
 
     // Supprimer définitivement une commande (cas admin)
     void supprimerCommande(UUID id);
+
+    BigDecimal calculerChiffreAffairesParCategorie(UUID categorieId, int mois, int annee);
 }
 

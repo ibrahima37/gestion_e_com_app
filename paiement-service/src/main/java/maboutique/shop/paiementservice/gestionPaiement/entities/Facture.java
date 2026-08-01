@@ -46,6 +46,7 @@ public class Facture extends BaseEntity {
 
     private MethodePaiement methodePaiement;
     private UUID commandeId;
+    private UUID utilisateurId;
 
     @ElementCollection
     @CollectionTable(
