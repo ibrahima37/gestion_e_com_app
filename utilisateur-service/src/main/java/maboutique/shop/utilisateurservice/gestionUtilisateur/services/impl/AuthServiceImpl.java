@@ -3,7 +3,7 @@ package maboutique.shop.utilisateurservice.gestionUtilisateur.services.impl;
 import lombok.RequiredArgsConstructor;
 import maboutique.shop.commonentities.gestionCommon.exceptions.DuplicateResourceException;
 import maboutique.shop.commonentities.gestionCommon.exceptions.ResourceNotFoundException;
-import maboutique.shop.utilisateurservice.gestionUtilisateur.config.JwtService;
+import maboutique.shop.commonsecurity.gestionSecurity.config.JwtService;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.securites.CustomUserDetailsService;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.creation.ChangerMotDePasseDto;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.creation.ConnexionDto;

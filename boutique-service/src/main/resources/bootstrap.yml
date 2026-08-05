@@ -19,4 +19,8 @@ logging:
     root: INFO
     org.springframework.cloud.netflix.eureka: DEBUG
 
+jwt:
+  secret: MaCleUltraSecreteDe32CaracteresMin!
+  expiration: 86400000
+
 

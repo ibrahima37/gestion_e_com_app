@@ -3,7 +3,10 @@ package maboutique.shop.utilisateurservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "maboutique.shop.utilisateurservice",
+        "maboutique.shop.commonsecurity"
+})
 public class UtilisateurServiceApplication {
 
     public static void main(String[] args) {

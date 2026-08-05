@@ -1,6 +1,9 @@
 package maboutique.shop.utilisateurservice.gestionUtilisateur.config;
 
 import lombok.RequiredArgsConstructor;
+import maboutique.shop.commonsecurity.gestionSecurity.config.BaseSecurityConfig;
+import maboutique.shop.commonsecurity.gestionSecurity.config.JwtAuthenticationFilter;
+import maboutique.shop.commonsecurity.gestionSecurity.config.JwtService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +25,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtAuthenticationFilter jwtFilter;
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter(){
+        return new JwtAuthenticationFilter(jwtService, userDetailsService);
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(
@@ -30,36 +39,11 @@ public class SecurityConfig {
             throws Exception {
 
         return http
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session ->
-                                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
 
                                 .requestMatchers("/api/auth/register", "/api/auth/login", "/api/auth/forgot-password", "/api/auth/reset-password").permitAll()
                                 .requestMatchers("/api/auth/change-password/**", "/api/auth/logout").authenticated()
                                 .anyRequest().authenticated())
-
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider(UserDetailsService userDetailsService,
-                                                            PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder);
-        return provider;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-
-        return new BCryptPasswordEncoder();
     }
 }

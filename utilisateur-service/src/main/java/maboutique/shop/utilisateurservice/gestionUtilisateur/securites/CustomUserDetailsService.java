@@ -23,12 +23,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         Personne personne = personneRepository.findByEmail(email)
                         .orElseThrow(() -> new UsernameNotFoundException("Utilisateur introuvable"));
 
-        return User.builder()
-                .username(personne.getEmail())
-                .password(personne.getMotDePasse()) // mot de passe encodé
-                .authorities(personne.getProfils().stream()
-                        .map(p -> "ROLE_" + p.getPersonnes())
-                        .toArray(String[]::new))
-                .build();
+        return new CustomUserDetails(personne);
+//        return User.builder()
+//                .username(personne.getEmail())
+//                .password(personne.getMotDePasse()) // mot de passe encodé
+//                .authorities(personne.getProfils().stream()
+//                        .map(p -> "ROLE_" + p.getPersonnes())
+//                        .toArray(String[]::new))
+//                .build();
     }
 }

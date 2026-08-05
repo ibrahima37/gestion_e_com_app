@@ -1,7 +1,7 @@
 package maboutique.shop.utilisateurservice.gestionUtilisateur.services.impl;
 
 import lombok.RequiredArgsConstructor;
-import maboutique.shop.utilisateurservice.gestionUtilisateur.config.JwtService;
+import maboutique.shop.commonsecurity.gestionSecurity.config.JwtService;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.response.AuthResponseDto;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.response.PermissionDto;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.response.ProfilDto;
