@@ -3,6 +3,7 @@ package maboutique.shop.utilisateurservice.gestionUtilisateur.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import maboutique.shop.commonentities.gestionCommon.entity.BaseEntity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "comptes")
-public class Compte extends maboutique.shop.commonentities.gestionCommon.entity.BaseEntity {
+public class Compte extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -33,7 +34,7 @@ public class Compte extends maboutique.shop.commonentities.gestionCommon.entity.
     @Builder.Default
     private Boolean actived = true;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(
             name = "titulaire_id",
             nullable = false,

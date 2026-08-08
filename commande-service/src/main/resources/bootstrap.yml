@@ -3,6 +3,8 @@ spring:
     name: commande-service
   config:
     import: optional:configserver:http://localhost:8888
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 server:
   port: 8082
 
@@ -11,6 +13,12 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.netflix.eureka: DEBUG
+
 jwt:
   secret: MaCleUltraSecreteDe32CaracteresMin!
+  expiration: 86400000
 

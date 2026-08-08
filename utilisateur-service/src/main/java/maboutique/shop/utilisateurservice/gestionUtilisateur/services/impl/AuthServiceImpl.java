@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import maboutique.shop.commonentities.gestionCommon.exceptions.DuplicateResourceException;
 import maboutique.shop.commonentities.gestionCommon.exceptions.ResourceNotFoundException;
 import maboutique.shop.commonsecurity.gestionSecurity.config.JwtService;
+import maboutique.shop.utilisateurservice.gestionUtilisateur.repository.UtilisateurRepository;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.securites.CustomUserDetailsService;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.creation.ChangerMotDePasseDto;
 import maboutique.shop.utilisateurservice.gestionUtilisateur.dtos.creation.ConnexionDto;
@@ -42,6 +43,7 @@ import java.util.UUID;
 @Transactional
 public class AuthServiceImpl implements AuthService {
 
+    private final UtilisateurRepository utilisateurRepository;
     private final CompteRepository compteRepository;
     private final ProfilRepository profilRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
@@ -73,6 +75,8 @@ public class AuthServiceImpl implements AuthService {
         utilisateur.setAdresse(dto.getAdresse());
         utilisateur.setDateInscription(new Date());
         utilisateur.setStatut(true);
+
+        utilisateur = utilisateurRepository.save(utilisateur);
 
         Compte compte = Compte.builder()
                 .email(dto.getEmail())

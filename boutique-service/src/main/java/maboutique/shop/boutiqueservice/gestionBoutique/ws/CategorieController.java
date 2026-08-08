@@ -20,21 +20,21 @@ public class CategorieController {
     private final CategorieService service;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('CREER_CATEGORIE')")
+    //@PreAuthorize("hasAuthority('CREER_CATEGORIE')")
     public ResponseEntity<CategorieDto> creerCategorie(@RequestBody CategorieRequestDto dto) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.creerCategorie(dto));
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('MODIFIER_CATEGORIE')")
+    //@PreAuthorize("hasAuthority('MODIFIER_CATEGORIE')")
     public ResponseEntity<CategorieDto> modifierCategorie(@PathVariable UUID id, @RequestBody CategorieDto dto) {
 
         return ResponseEntity.ok(service.modifierCategorie(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('SUPPRIMER_CATEGORIE')")
+    //@PreAuthorize("hasAuthority('SUPPRIMER_CATEGORIE')")
     public ResponseEntity<Void> supprimerCategorie(@PathVariable UUID id) {
 
         service.supprimerCategorie(id);
@@ -43,14 +43,14 @@ public class CategorieController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('LISTER_CATEGORIE')")
+    //@PreAuthorize("hasAuthority('LISTER_CATEGORIE')")
     public ResponseEntity<List<CategorieDto>> listerCategories() {
 
         return ResponseEntity.ok(service.listerCategories());
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('RECHERCHE_CATEGORIE')")
+    //@PreAuthorize("hasAuthority('RECHERCHE_CATEGORIE')")
     public ResponseEntity<CategorieDto> rechercherParId(@PathVariable UUID id) {
 
         return ResponseEntity.ok(service.rechercherParId(id));

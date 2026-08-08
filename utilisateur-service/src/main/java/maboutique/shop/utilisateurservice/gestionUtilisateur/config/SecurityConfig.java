@@ -39,11 +39,19 @@ public class SecurityConfig {
             throws Exception {
 
         return http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-
+                                // Endpoints publics
                                 .requestMatchers("/api/auth/register", "/api/auth/login", "/api/auth/forgot-password", "/api/auth/reset-password").permitAll()
+
+                                // Endpoints protégés
                                 .requestMatchers("/api/auth/change-password/**", "/api/auth/logout").authenticated()
-                                .anyRequest().authenticated())
+
+                                // Tout le reste nécessite authentification
+                                .anyRequest().authenticated()
+                )
+                // Ajout du filtre JWT pour les endpoints protégés
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }
